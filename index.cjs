@@ -7,11 +7,14 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Enable CORS with specific origin
-app.use(cors({
-    origin: 'http://localhost:5173', // Adjust this to match your frontend's URL
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true // Set to true if your request requires credentials like cookies, HTTP authentication or client-side SSL certificates
-}));
+const corsOptions = {
+    origin: 'http://localhost:5173', // Replace with your frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
+app.use(cors(corsOptions));
 
 // Middleware to parse JSON bodies
 app.use(express.json());
