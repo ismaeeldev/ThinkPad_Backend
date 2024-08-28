@@ -24,7 +24,7 @@ app.use('/api/notes', require('./routes/notes.cjs'));
 
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.send('Hello World! of Thinkpad Backend ')
 })
 
 // Handle 404 errors
