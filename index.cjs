@@ -8,7 +8,7 @@ const port = process.env.PORT || 3000;
 
 // Enable CORS with specific origin
 const corsOptions = {
-    origin: 'http://localhost:5173', // Replace with your frontend URL
+    origin: 'https://thinkpad-ruby.netlify.app', // Replace with your frontend URL
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
