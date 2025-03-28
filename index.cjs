@@ -26,6 +26,7 @@ connectToMongo();
 // Define routes
 app.use('/api/auth', require('./routes/auth.cjs'));
 app.use('/api/notes', require('./routes/notes.cjs'));
+app.use('/api', require('./routes/login'));
 
 // Home route
 app.get('/', (req, res) => {
